@@ -47,7 +47,8 @@ const aCurriedFunction = c.curry(aFunction);
 const callUncurried = aFunction(1, 2, 3);
 // { a: 1, b: 2, c: 3 }
 
-// Curried function can take its arguments in  many ways, but the ORDER they are recieved in is always the same
+// Curried function can take its arguments in  many ways,
+// but the ORDER they are recieved in is always the same
 const callCurriedOne = aCurriedFunction(1)(2)(3);
 // { a: 1, b: 2, c: 3}
 const callCurriedTwo = aCurriedFunction(1, 2)(3);
@@ -57,8 +58,11 @@ const callCurriedThree = aCurriedFunction(1)(2, 3);
 const callCurriedFour = aCurriedFunction(1, 2, 3);
 // { a: 1, b: 2, c: 3}
 
-// Curry can also accept more arguments after the first function argument that is passed.  These are applied to the curried function, until the number of arguments passed equals the number of arguments the original function expected, after which the returned value from curry is the returned value from the original function with the arguments applied to it.
-
+// Curry can also accept more arguments after the first function argument
+// that is passed.  These are applied to the curried function, until the
+// number of arguments passed equals the number of arguments the original
+// function expected, after which the returned value from curry is the
+// returned value from the original function with the arguments applied to it.
 const aCurriedFunctionWith1ArgApplied = c.curry(aFunction, 1);
 // (b) => (c) => ({ a: 1, b, c})
 const aCurriedFunctionWith2ArgsApplied = c.curry(aFunction, 1, 2);
