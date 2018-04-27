@@ -18,6 +18,12 @@ A functional programming library designed for use with redux, written by someone
 
 ```js
 const { core: c } = require('mrdux');
+
+const val = 'A Value';
+
+// Identity just returns what is passed to it
+const valIdentity = c.identity(val);
+// 'A Value'
 ```
 
 ### Curry
