@@ -1,10 +1,10 @@
 # M R Dux
 
-A functional programming library designed for use with redux, written by someone who never passed a single algebra class... ever.
+A functional programming library designed for use with redux, written by someone who never passed a single algebra class... _**ever**_.
 
 ---
 
-## Core
+## Core Methods
 
 ### Identity
 
@@ -121,7 +121,7 @@ const compositionResult = functionComposition('0');
 
 ---
 
-## Object
+## Object Methods
 
 ### Has
 
@@ -472,7 +472,763 @@ const objDroppedLast = o.dropLastKey(obj);
 
 ---
 
-## Glossary
+## Array Methods
+
+### Concat
+
+* **Description:**  
+  A [curried](#curry) [n-ary](#n-ary) function that takes a list of arrays as its first argument and a single array as its second, then returns the single array [appended](#append) with the values in the list of arrays.
+
+* **Signature:**  
+  `[Array] -> Array -> Array`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arr3 = [7, 8, 9];
+
+const arr1Arr2 = a.concat(arr2)(arr1);
+// [ 1, 2, 3, 4, 5, 6]
+const arr3Arr2 = a.concat(arr2)(arr3);
+// [ 7, 8, 9, 4, 5, 6]
+const arr1Arr2Arr3 = a.concat(arr2, arr3)(arr1);
+// [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+const arr3Arr2Arr1 = a.concat(arr2, arr1)(arr3);
+// [ 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
+```
+
+---
+
+### All
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) [higher order function](#higher-order-function) that takes a [predicate function](#predicate-function) as its first argument and an array as its second and returns a boolean indicating whether the [predicate function](#predicate-function) returned true with all the elements.
+
+* **Signature:**  
+  `Function -> Array -> Boolean`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+// Predicate function
+const equalsOne = x => x === 1;
+
+const arr1 = [1, 1, 1, 1];
+const arr2 = [1, 2, 3, 4];
+
+const truthy = a.all(equalsOne)(arr1);
+// true
+const falsy = a.all(equalsOne)(arr2);
+// false
+```
+
+---
+
+### Filter
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) [higher order function](#higher-order-function) that takes a [predicate function](#predicate-function) as its first argument and an array as its second and returns a copy of the array with only the elements that the [predicate function](#predicate-function) returns true with.
+
+* **Signature:**  
+  `Function -> Array -> Array`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+// Predicate function
+const equalsOne = x => x === 1;
+
+const arr1 = [1, 1, 1, 1];
+const arr2 = [1, 2, 3, 4];
+
+const allFilteredOut = a.filter(equalsOne)(arr1);
+// []
+const oneFilteredOut = a.filter(equalsOne)(arr2);
+// [ 2, 3, 4 ]
+```
+
+---
+
+### Find
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) [higher order function](#higher-order-function) that takes a [predicate function](#predicate-function) as its first argument and an array as its second and returns the first element that the [predicate function](#predicate-function) returns true with, or undefined.
+
+* **Signature:**  
+  `Function -> Array -> Value`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+// Predicate function
+const equalsOne = x => x === 1;
+
+const arr1 = [1, 1, 1, 1];
+const arr2 = [2, 3, 4, 5];
+
+const hasOne = a.find(equalsOne)(arr1);
+// 1
+const doesNotHaveOne = a.find(equalsOne)(arr2);
+// undefined
+```
+
+---
+
+### Find Index
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) [higher order function](#higher-order-function) that takes a [predicate function](#predicate-function) as its first argument and an array as its second and returns the first index that the [predicate function](#predicate-function) returns true with, or -1.
+
+* **Signature:**  
+  `Function -> Array -> Number`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+// Predicate function
+const equalsOne = x => x === 1;
+
+const arr1 = [2, 3, 1, 4];
+const arr2 = [2, 3, 4, 5];
+
+const hasOne = a.findIndex(equalsOne)(arr1);
+// 2
+const doesNotHaveOne = a.findIndex(equalsOne)(arr2);
+// -1
+```
+
+---
+
+### Includes
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) function that takes a value as its first argument and an array as its second, then returns a boolean stating whether or not the value passed is in an element in the array.
+
+* **Signature:**  
+  `Value -> Array -> Boolean`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+const val = 'test';
+const arr1 = [1, 2, 'test', 3, 4];
+const arr2 = [1, 2, 3, 4, 5];
+
+const truthy = a.includes(val)(arr1);
+// true
+const falsy = a.includes(val)(arr2);
+// falsy
+```
+
+---
+
+### Join
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) function that takes a separator string as its first argument and an array as its send, then returns a single string of all elements stringified, seperated by the provided separator string.
+
+* **Signature:**  
+  `String -> Array -> String`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+const separatorString = ' + ';
+const arr = ['a', 'b', 'c'];
+
+const joinedArr = a.join(separatorString)(arr);
+// 'a + b + c'
+```
+
+---
+
+### Map
+
+* **Description:**  
+  A [curried](#curry) [binary](#binary) [higher order function](#higher-order-function) that takes a callback function as its first argument and an array as its second and returns an new array of the results of passing each of the array arguments elements through the callback function.
+
+* **Signature:**  
+  `Function -> Array -> Array`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+
+const increment = x => x + 1;
+const arr = [1, 2, 3];
+
+const incrementedArr = a.map(increment)(arr);
+// [2, 3, 4]
+```
+
+---
+
+### Reduce and Reduce Right
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Slice
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Some
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Sort
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Copy Within
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Fill
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### To Locale String
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Index Of
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Last Index Of
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Push
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Splice
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### To String
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Entries
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Keys
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Pop
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Shift
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Unshift
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Reverse
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### First
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Last
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### All
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Any
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Append
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Prepend
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Drop
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Drop Last
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Take
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Take Last
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Flatten
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Insert
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Insert All
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Update
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Update All
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+### Has Match In
+
+* **Description:**  
+  ...
+
+* **Signature:**  
+  `->`
+
+* **Example:**
+
+```javascript
+const { array: a } = require('mrdux');
+```
+
+---
+
+---
+
+---
+
+## Glossary of Terms
 
 ### Arity
 
@@ -525,17 +1281,29 @@ const functionModule = {
 ### N-ary
 
 * **Description:**  
-  A function that takes n number of arguments
+  A function that takes n number of arguments. See [arity](#arity).
 
 * **Example:**  
   `(a, b, c) => ({ a, b, c})` is a n-ary function where n is 3
 
+---
+
 ### Unary
 
 * **Description:**  
-  Technically unary just means one, but in the context of this library we're usually meaning a function that takes on argument.
+  Technically unary just means of one, but in the context of this library we're usually meaning a function that takes one argument.
 
 * **Example:**  
   `(a) => a + 1` is a unary function
+
+---
+
+### Binary
+
+* **Description:**  
+  Technically unary just means of two, but in the context of this library we're usually meaning a function that takes two arguments.
+
+* **Example:**  
+  `(a, b) => a + b` is a binary function
 
 ---
