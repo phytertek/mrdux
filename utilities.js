@@ -15,6 +15,6 @@ u.newUid = obj => {
   const attempt = Date.now();
   return obj.hasOwnProperty(attempt) ? newUid(obj) : attempt;
 };
-u.assignUid = val => obj => ({ ...obj, [newUid(obj)]: val });
+u.assignUid = curry((val, obj) => ({ ...obj, [newUid(obj)]: val }));
 
 module.exports = u;
