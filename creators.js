@@ -1,9 +1,10 @@
 const { has, keys } = require('./object');
 const { curry } = require('./core');
 
+const rdx = {};
+
 const createAction = curry((type, payload) => ({ type, payload }));
 rdx.createAction = createAction;
-const rdx = { createAction };
 
 rdx.actionsFrom = (actionsModule = {}) =>
   keys(actionsModule).reduce(
