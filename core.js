@@ -1,17 +1,12 @@
-const c = {};
-const curry = (fn, ...args) =>
-  fn.length <= args.length
-    ? fn(...args)
-    : (...restArgs) => curry(fn, ...args, ...restArgs);
-c.curry = curry;
-//
-const cp = method => (...fns) => initialValue =>
-  fns[method]((acc, fn) => fn(acc), initialValue);
+const curry = (f, ...a) =>
+  f.length <= a.length ? f(...a) : (...r) => curry(f, ...a, ...r);
 
-c.compose = cp('reduceRight');
+const cp = m => (...f) => i => f[m]((a, fn) => fn(a), i);
 
-c.pipe = cp('reduce');
+const compose = cp('reduceRight');
 
-c.identity = val => val;
+const pipe = cp('reduce');
 
-module.exports = c;
+const identity = v => v;
+
+module.exports = { curry, compose, pipe, identity };
