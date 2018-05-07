@@ -1,6 +1,6 @@
 {
   "name": "mrdux",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "homepage": "https://github.com/phytertek/mrdux#readme",
   "repository": "https://github.com/phytertek/mrdux.git",
   "bugs": {
@@ -11,16 +11,13 @@
   "scripts": {
     "compile": "npx babel src --out-dir ./",
     "patch": "npm run git:patch && npm run github:push",
-    "git:patch":
-      "git add . && git commit -m 'publish patch' && npm run patch:publish",
+    "git:patch": "git add . && git commit -m 'publish patch' && npm run patch:publish",
     "patch:publish": "npm version patch && npm publish",
     "minor": "npm run git:minor && npm run github:push",
-    "git:minor":
-      "git add . && git commit -m 'publish minor' && npm run minor:publish",
+    "git:minor": "git add . && git commit -m 'publish minor' && npm run minor:publish",
     "minor:publish": "npm version minor && npm publish",
     "major": "npm run git:major && npm run github:push",
-    "git:major":
-      "git add . && git commit -m 'publish major' && npm run major:publish",
+    "git:major": "git add . && git commit -m 'publish major' && npm run major:publish",
     "major:publish": "npm version major && npm publish",
     "github:push": "git push origin master"
   },
