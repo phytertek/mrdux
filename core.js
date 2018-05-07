@@ -1,12 +1,1 @@
-const curry = (f, ...a) =>
-  f.length <= a.length ? f(...a) : (...r) => curry(f, ...a, ...r);
-
-const cp = m => (...f) => i => f[m]((a, fn) => fn(a), i);
-
-const compose = cp('reduceRight');
-
-const pipe = cp('reduce');
-
-const identity = v => v;
-
-module.exports = { curry, compose, pipe, identity };
+var _extends=Object.assign||function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a};const curry=(b,...c)=>b.length<=c.length?b(...c):(...a)=>curry(b,...c,...a),curryModule=a=>Object.keys(a).reduce((b,c)=>_extends({},b,{[c]:curry(a[c])}),{}),cp=a=>(...b)=>c=>b[a]((b,a)=>a(b),c),compose=cp('reduceRight'),pipe=cp('reduce'),identity=a=>a;module.exports={curry,curryModule,compose,pipe,identity};

@@ -1,1 +1,4 @@
 scratch.js
+.babelrc
+/src
+/node_modules
