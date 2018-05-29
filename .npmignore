@@ -1,4 +1,5 @@
-scratch.js
-.babelrc
-/src
+tsconfig.json
+build.js
+*.ts
+/spec
 /node_modules
