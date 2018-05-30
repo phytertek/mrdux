@@ -34,7 +34,6 @@ export const createHttpActions = (
         headers: auth ? { Authorization: auth } : {}
       }
     });
-  encodeURIComponent;
   return [
     { verb: 'get' },
     { verb: 'post' },

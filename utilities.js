@@ -36,7 +36,6 @@ exports.createHttpActions = function (api, root, axios) {
             }
         });
     }); }; };
-    encodeURIComponent;
     return [
         { verb: 'get' },
         { verb: 'post' },
