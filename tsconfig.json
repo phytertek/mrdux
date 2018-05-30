@@ -1,6 +1,8 @@
 {
   "listEmittedFiles": true,
   "compilerOptions": {
-    "lib": ["es2015"]
+    "module": "commonjs",
+    "lib": ["es2015"],
+    "jsx": "react"
   }
 }

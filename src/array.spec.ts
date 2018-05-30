@@ -1,4 +1,4 @@
-const array = require('../src/array');
+import * as array from './array';
 
 describe('Array methods', () => {
   test('all', () => {

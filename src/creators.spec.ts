@@ -1,4 +1,4 @@
-const creators = require('../src/creators');
+import * as creators from './creators';
 
 describe('Creator methods (redux)', () => {
   describe('createAction', () => {

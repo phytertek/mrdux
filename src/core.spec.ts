@@ -1,4 +1,4 @@
-const core = require('../src/core');
+import * as core from './core';
 
 describe('Core methods', () => {
   describe('curry', () => {

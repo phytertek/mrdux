@@ -23,10 +23,23 @@
     "github:push": "git push origin master"
   },
   "devDependencies": {
-    "jest": "^22.4.3",
-    "ts-jest": "^22.4.6"
+    "@types/jest": "^22.2.3",
+    "jest": "^23.0.1",
+    "ts-jest": "^22.4.6",
+    "typescript": "^2.8.3"
   },
   "jest": {
-    "verbose": true
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

@@ -1,4 +1,4 @@
-const object = require('../src/object');
+import * as object from '../src/object';
 
 describe('Object methods', () => {
   describe('has', () => {

@@ -1,5 +1,8 @@
 tsconfig.json
-build.js
+/src
 *.ts
 /spec
 /node_modules
+*.md
+yarn.lock
+

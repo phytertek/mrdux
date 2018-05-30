@@ -1,4 +1,4 @@
-const utilities = require('../src/utilities');
+import * as utilities from '../src/utilities';
 
 describe('Utility methods', () => {
   describe('mapToId', () => {
