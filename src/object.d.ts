@@ -1,0 +1,13 @@
+export declare const has: Function;
+export declare const keys: (o: object) => string[];
+export declare const vals: (o: object) => any[];
+export declare const entries: (o: object) => any[][];
+export declare const assign: Function;
+export declare const remove: Function;
+export declare const evolve: Function;
+export declare const getFirstKey: (o: object) => string | number;
+export declare const getLastKey: (o: object) => string | number;
+export declare const getFirstVal: (o: object) => any;
+export declare const getLastVal: (o: object) => any;
+export declare const dropFirstKey: (o: object) => object;
+export declare const dropLastKey: (o: object) => object;

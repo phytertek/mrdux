@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --watch",
-    "build": "tsc && jest && mv ./src/*.js ./",
+    "build": "tsc && mv -f ./src/*.js ./",
     "patch": "npm run git:patch && npm run github:push",
     "git:patch": "git add . && git commit -m 'publish patch' && npm run patch:publish",
     "patch:publish": "npm version patch && npm publish",
@@ -26,7 +26,8 @@
     "@types/jest": "^22.2.3",
     "jest": "^23.0.1",
     "ts-jest": "^22.4.6",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "tslib": "^1.9.2"
   },
   "jest": {
     "transform": {
