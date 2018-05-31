@@ -3,8 +3,10 @@ var _this = this;
 exports.__esModule = true;
 var tslib_1 = require("tslib");
 var object_1 = require("./object");
-var core_1 = require("./core");
-exports.createAction = core_1.curry(function (t, p) { return ({ type: t, payload: p }); });
+exports.createAction = function (t) { return function (p) {
+    if (p === void 0) { p = {}; }
+    return ({ type: t, payload: p });
+}; };
 exports.actionsFrom = function (am) {
     return object_1.keys(am).reduce(function (ac, t) {
         return (tslib_1.__assign({}, ac, (_a = {}, _a[t] = exports.createAction(t), _a)));
@@ -28,11 +30,11 @@ exports.generateAsyncFlow = function (t) { return function (a) { return function
                     return [4 /*yield*/, a[t](p, 'gET Auth Header Here', s)];
                 case 1:
                     r = _b.sent();
-                    n(exports.createAction(t + "_SUCCESS", r.data));
+                    n(exports.createAction(t + "_SUCCESS")(r.data));
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _b.sent();
-                    n(exports.createAction(t + "_ERROR", e_1));
+                    n(exports.createAction(t + "_ERROR")(e_1));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }

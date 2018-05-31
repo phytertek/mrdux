@@ -1,4 +1,7 @@
-export declare const createAction: Function;
+export declare const createAction: (t: any) => (p?: {}) => {
+    type: any;
+    payload: {};
+};
 export declare const actionsFrom: (am: any) => {};
 export declare const reducerFrom: (i: any, a: any) => (s: any, { type: t, payload: p }: {
     type: any;

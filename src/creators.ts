@@ -1,7 +1,7 @@
 import { has, keys } from './object';
 import { curry } from './core';
 
-export const createAction = curry((t, p) => ({ type: t, payload: p }));
+export const createAction = t => (p = {}) => ({ type: t, payload: p });
 
 export const actionsFrom = am =>
   keys(am).reduce(
@@ -19,9 +19,9 @@ export const generateAsyncFlow = t => a => async (n, s, { payload: p }) => {
   try {
     n(createAction(`${t}_SENT`)());
     const r = await a[t](p, 'gET Auth Header Here', s);
-    n(createAction(`${t}_SUCCESS`, r.data));
+    n(createAction(`${t}_SUCCESS`)(r.data));
   } catch (e) {
-    n(createAction(`${t}_ERROR`, e));
+    n(createAction(`${t}_ERROR`)(e));
   }
 };
 
