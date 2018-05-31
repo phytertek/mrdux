@@ -46,5 +46,5 @@ exports.createHttpActions = function (api, root, axios) {
     ].reduce(function (ao, v) {
         return (tslib_1.__assign({}, ao, (_a = {}, _a[v.verb] = createAction(v.verb), _a)));
         var _a;
-    });
+    }, {});
 };

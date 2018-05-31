@@ -41,5 +41,5 @@ export const createHttpActions = (
     { verb: 'delete' },
     { verb: 'patch' },
     { verb: 'head' }
-  ].reduce((ao, v): any => ({ ...ao, [v.verb]: createAction(v.verb) }));
+  ].reduce((ao, v): any => ({ ...ao, [v.verb]: createAction(v.verb) }), {});
 };
