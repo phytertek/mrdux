@@ -47,8 +47,11 @@ exports.asyncMiddlewareFrom = function (am) { return function (s) { return funct
         return [2 /*return*/];
     });
 }); }; }; }; };
-exports.middlewareFrom = function (am) { return function (s) { return function (n) { return function (a) {
-    n(a);
-    if (object_1.has(a.type)(am))
-        am[a.type](n, s.getState(), a);
-}; }; }; };
+exports.middlewareFrom = function (am) { return function (s) { return function (n) { return function (a) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+    return tslib_1.__generator(this, function (_a) {
+        n(a);
+        if (object_1.has(a.type)(am))
+            am[a.type](n, s.getState(), a);
+        return [2 /*return*/];
+    });
+}); }; }; }; };

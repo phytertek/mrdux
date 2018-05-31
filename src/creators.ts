@@ -30,7 +30,7 @@ export const asyncMiddlewareFrom = am => s => n => async a => {
   if (has(a.type)(am)) generateAsyncFlow(a.type)(am)(n, s.getState(), a);
 };
 
-export const middlewareFrom = am => s => n => a => {
+export const middlewareFrom = am => s => n => async a => {
   n(a);
   if (has(a.type)(am)) am[a.type](n, s.getState(), a);
 };

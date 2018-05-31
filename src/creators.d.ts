@@ -8,4 +8,4 @@ export declare const generateAsyncFlow: (t: any) => (a: any) => (n: any, s: any,
     payload: any;
 }) => Promise<void>;
 export declare const asyncMiddlewareFrom: (am: any) => (s: any) => (n: any) => (a: any) => Promise<void>;
-export declare const middlewareFrom: (am: any) => (s: any) => (n: any) => (a: any) => void;
+export declare const middlewareFrom: (am: any) => (s: any) => (n: any) => (a: any) => Promise<void>;
